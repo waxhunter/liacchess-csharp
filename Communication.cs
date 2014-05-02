@@ -49,7 +49,7 @@ namespace LIAC_CHESS
             }
             string message = new string(msg);
             stream.Flush();
-            Console.WriteLine("mensagem lida: " + message);
+            Console.WriteLine("Mensagem lida: " + message);
 
             return message;
         }

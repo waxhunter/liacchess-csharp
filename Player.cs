@@ -23,6 +23,41 @@ namespace LIAC_CHESS
         public PlayerName pName { get; set; }
         public int color { get; set; }
 
+        public List<Piece> PlayerPiecesInBoard(Board board)
+        {
+            List<Piece> pieceList = new List<Piece>();
+            foreach (Piece piece in board.pieceList)
+            {
+                if (piece.color == this.color)
+                {
+                    pieceList.Add(piece);
+                }
+            }
+            return pieceList;
+        }
+
+        public List<Move> PossibleMovements(Board board)
+        {
+            List<Move> moveList = new List<Move>();
+            
+            if (board.GetBoardState().draw == true || board.GetBoardState().winner != 0)
+            {
+                // Game is over, therefore no movements can be made
+                return moveList;
+            }
+            else
+            {
+                List<Piece> pieceList = PlayerPiecesInBoard(board);
+
+                foreach (Piece piece in pieceList)
+                {
+                    moveList.Concat(PossibleMovements(board));
+                }
+            }
+
+            return moveList;
+        }
+
         public Move GenerateMovement(Board board)
         {
             Move movement = new Move(new List<int>() { 4, 1 }, new List<int>() { 4, 2 });

@@ -124,5 +124,25 @@ namespace LIAC_CHESS
 
             return position;
         }
+
+        public Board GenerateMovement(Move movement)
+        {
+            Board newBoard = new Board();
+
+            newBoard.pieceList = this.pieceList;
+
+            foreach (Piece piece in newBoard.pieceList)
+            {
+                if (piece.position == movement.from)
+                {
+                    Piece newPiece = piece;
+                    newBoard.pieceList.Remove(piece);
+                    newPiece.position = movement.to;
+                    newBoard.pieceList.Add(newPiece);
+                }
+            }
+
+            return newBoard;
+        }
     }
 }

@@ -23,8 +23,7 @@ namespace LIAC_CHESS
             #endregion
 
             #region Connection
-            string ip = "127.0.0.1";
-
+            string ip;
             Console.Write("Digite o ip para efetuar conexao: ");
             ip = Console.ReadLine();
 

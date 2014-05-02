@@ -25,6 +25,7 @@ namespace LIAC_CHESS
     public class Piece
     {
         public int color { get; set; }
+        public string type { get; set; }
         public List<int> position;
 
         public virtual List<Move> PossibleMovements(Board board)
@@ -44,6 +45,7 @@ namespace LIAC_CHESS
         {
             this.position = position;
             this.color = color;
+            this.type = "Pawn";
         }
 
         public override List<Move> PossibleMovements(Board board)
@@ -140,6 +142,7 @@ namespace LIAC_CHESS
         {
             this.position = position;
             this.color = color;
+            this.type = "Bishop";
         }
 
         public override List<Move> PossibleMovements(Board board)
@@ -243,6 +246,7 @@ namespace LIAC_CHESS
         {
             this.position = position;
             this.color = color;
+            this.type = "Rook";
         }
 
         public override List<Move> PossibleMovements(Board board)
