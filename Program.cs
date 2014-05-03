@@ -36,7 +36,7 @@ namespace LIAC_CHESS
             stream = Communication.Connect(ip, port, client);
 
             Console.WriteLine("Enviando informacao de nome...");
-            PlayerName pName = new PlayerName { name = "King Joffrey" };
+            PlayerName pName = new PlayerName { name = "Conan" };
             player.pName = pName;
             Communication.SendToServer(stream, pName);
             Console.WriteLine("Nome enviado: " + pName.name + "\n"); 

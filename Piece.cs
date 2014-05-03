@@ -10,23 +10,39 @@ using Newtonsoft.Json;
 
 namespace LIAC_CHESS
 {
-    public class Move
-    {
-        public List<int> from { get; set; }
-        public List<int> to { get; set; }
-
-        public Move(List<int> from, List<int> to)
-        {
-            this.from = from;
-            this.to = to;
-        }
-    }
-
     public class Piece
     {
         public int color { get; set; }
         public string type { get; set; }
         public List<int> position;
+
+        public bool IsPawn()
+        {
+            if (type == "Pawn") return true;
+            else return false;
+        }
+
+        public bool IsBishop()
+        {
+            if (type == "Bishop") return true;
+            else return false;
+        }
+
+        public bool IsRook()
+        {
+            if (type == "Rook") return true;
+            else return false;
+        }
+
+        public int verticalPosition()
+        {
+            return position[0];
+        }
+
+        public int horizontalPosition()
+        {
+            return position[1];
+        }
 
         public virtual List<Move> PossibleMovements(Board board)
         {
@@ -43,7 +59,13 @@ namespace LIAC_CHESS
 
         public Pawn(List<int> position, int color)
         {
-            this.position = position;
+            this.position = new List<int>();
+
+            foreach (int pos in position)
+            {
+                this.position.Add(pos);
+            }
+
             this.color = color;
             this.type = "Pawn";
         }
@@ -108,7 +130,6 @@ namespace LIAC_CHESS
                     if (board.PieceInPosition(leftDiagonal).color != this.color)
                     {
                         movements.Add(new Move(this.position, leftDiagonal));
-                        Console.WriteLine("\n\n\n Peao pode fazer diagonal! \n\n\n");
                     }
                 }
             }
@@ -122,7 +143,6 @@ namespace LIAC_CHESS
                     if (board.PieceInPosition(rightDiagonal).color != this.color)
                     {
                         movements.Add(new Move(this.position, rightDiagonal));
-                        Console.WriteLine("\n\n\n Peao pode fazer diagonal! \n\n\n");
                     }
                 }
             }
@@ -391,7 +411,6 @@ namespace LIAC_CHESS
                     {
                         if (board.PieceInPosition(down).color != this.color)
                         {
-                            Console.WriteLine("Movimento valido: torre de " + this.position[0] + "," + this.position[1] + " para " + down[0] + "," + down[1]); 
                             movements.Add(new Move(this.position, down));
                             validMovement = false;
                         }

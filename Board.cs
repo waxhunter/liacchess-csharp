@@ -25,6 +25,10 @@ namespace LIAC_CHESS
 
     public class Board
     {
+        public const int MAX_PAWNS = 8;
+        public const int MAX_BISHOPS = 2;
+        public const int MAX_ROOKS = 2;
+
         private BoardState state = new BoardState();
         public List<Piece> pieceList = new List<Piece>();
 
@@ -125,24 +129,62 @@ namespace LIAC_CHESS
             return position;
         }
 
-        public Board GenerateMovement(Move movement)
+        public static Board GenerateMovement(Board board, Move movement)
         {
             Board newBoard = new Board();
 
-            newBoard.pieceList = this.pieceList;
-
-            foreach (Piece piece in newBoard.pieceList)
+            foreach (Piece piece in board.pieceList)
             {
-                if (piece.position == movement.from)
+                if (piece.position[0] == movement.from[0] && piece.position[1] == movement.from[1])
                 {
-                    Piece newPiece = piece;
-                    newBoard.pieceList.Remove(piece);
-                    newPiece.position = movement.to;
-                    newBoard.pieceList.Add(newPiece);
+                    if (piece.IsPawn())
+                    { 
+                        Pawn newPiece = new Pawn(movement.to, piece.color);
+                        newBoard.pieceList.Add(newPiece);
+                    }
+                    else if (piece.IsBishop())
+                    {
+                        Bishop newPiece = new Bishop(movement.to, piece.color);
+                        newBoard.pieceList.Add(newPiece);
+                    }
+                    else if (piece.IsRook())
+                    {
+                        Rook newPiece = new Rook(movement.to, piece.color);
+                        newBoard.pieceList.Add(newPiece);
+                    }
+                }
+                else
+                {
+                    if(piece.position[0] != movement.to[0] || piece.position[1] != movement.to[1])
+                        newBoard.pieceList.Add(piece);
                 }
             }
 
             return newBoard;
+        }
+
+        public bool IsDifferent(Board other)
+        {
+            foreach (Piece otherPiece in other.pieceList)
+            {
+                bool found = false;
+                foreach (Piece thisPiece in pieceList)
+                {
+                    if (thisPiece.type == otherPiece.type && thisPiece.color == otherPiece.color)
+                    {
+                        if (thisPiece.position[0] == otherPiece.position[0] && thisPiece.position[1] == otherPiece.position[1])
+                        {
+                            found = true;
+                        }
+                    }
+                }
+
+                if (found == false)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

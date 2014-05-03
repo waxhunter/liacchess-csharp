@@ -30,7 +30,7 @@ namespace LIAC_CHESS
         {
             StreamWriter streamWriter = new StreamWriter(stream);
             string json = JsonConvert.SerializeObject(information, Formatting.Indented);
-            Console.WriteLine("Mensagem enviada: " + json);
+            //Console.WriteLine("Mensagem enviada: " + json);
             streamWriter.Write(json);
             streamWriter.Flush();
         }
@@ -49,7 +49,7 @@ namespace LIAC_CHESS
             }
             string message = new string(msg);
             stream.Flush();
-            Console.WriteLine("Mensagem lida: " + message);
+            //Console.WriteLine("Mensagem lida: " + message);
 
             return message;
         }
