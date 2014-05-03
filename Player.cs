@@ -51,7 +51,8 @@ namespace LIAC_CHESS
 
                 foreach (Piece piece in pieceList)
                 {
-                    moveList.Concat(PossibleMovements(board));
+                    List<Move> pieceMovementsList = piece.PossibleMovements(board);
+                    moveList.AddRange(pieceMovementsList);
                 }
             }
 
@@ -60,19 +61,10 @@ namespace LIAC_CHESS
 
         public Move GenerateMovement(Board board)
         {
-            Move movement = new Move(new List<int>() { 4, 1 }, new List<int>() { 4, 2 });
+            List<Move> possibleMoves = PossibleMovements(board);
 
-            foreach (Piece piece in board.pieceList)
-            {
-                if (piece.color == this.color)
-                {
-                    if (piece.PossibleMovements(board).Count > 0)
-                    {
-                        movement = piece.PossibleMovements(board)[0];
-                    }
-                    break;
-                }
-            }
+            Random rand = new Random();
+            Move movement = possibleMoves[rand.Next(possibleMoves.Count - 1)];
 
             // Calculate minimax algorithm here
 

@@ -96,7 +96,7 @@ namespace LIAC_CHESS
         {
             foreach (Piece piece in pieceList)
             {
-                if (piece.position == position)
+                if (piece.position[0] == position[0] && piece.position[1] == position[1])
                 {
                     return piece;
                 }

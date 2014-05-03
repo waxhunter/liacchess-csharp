@@ -60,8 +60,8 @@ namespace LIAC_CHESS
                 twoFront = new List<int>() { this.position[0] - 2, this.position[1] };
                 left = new List<int>() { this.position[0], this.position[1] - 1 };
                 right = new List<int>() { this.position[0], this.position[1] + 1 };
-                leftDiagonal = new List<int>() { this.position[0] - 1, this.position[1] - 1 };
-                rightDiagonal = new List<int>() { this.position[0] - 1, this.position[1] + 1 };
+                leftDiagonal = new List<int>() { this.position[0] - 1, this.position[1] + 1 };
+                rightDiagonal = new List<int>() { this.position[0] - 1, this.position[1] - 1 };
             }
             else
             {
@@ -108,6 +108,7 @@ namespace LIAC_CHESS
                     if (board.PieceInPosition(leftDiagonal).color != this.color)
                     {
                         movements.Add(new Move(this.position, leftDiagonal));
+                        Console.WriteLine("\n\n\n Peao pode fazer diagonal! \n\n\n");
                     }
                 }
             }
@@ -121,6 +122,7 @@ namespace LIAC_CHESS
                     if (board.PieceInPosition(rightDiagonal).color != this.color)
                     {
                         movements.Add(new Move(this.position, rightDiagonal));
+                        Console.WriteLine("\n\n\n Peao pode fazer diagonal! \n\n\n");
                     }
                 }
             }
@@ -160,10 +162,7 @@ namespace LIAC_CHESS
             {
                 validMovement = false;
                 leftUpper = new List<int>() { this.position[0] + i, this.position[1] - i };
-                rightUpper = new List<int>() { this.position[0] + i, this.position[1] + i };
-                leftLower = new List<int>() { this.position[0] - i, this.position[1] - i };
-                rightLower = new List<int>() { this.position[0] - i, this.position[1] + i };
-
+                
                 if (Board.IsValidPosition(leftUpper))
                 {
                     if (board.PieceInPosition(leftUpper) == null)
@@ -176,10 +175,22 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(leftUpper).color != this.color)
                         {
                             movements.Add(new Move(this.position, leftUpper));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            }
+            while (validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+
+                rightUpper = new List<int>() { this.position[0] + i, this.position[1] + i };
 
                 if (Board.IsValidPosition(rightUpper))
                 {
@@ -193,10 +204,22 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(rightUpper).color != this.color)
                         {
                             movements.Add(new Move(this.position, rightUpper));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            }
+            while (validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+
+                leftLower = new List<int>() { this.position[0] - i, this.position[1] - i };
 
                 if (Board.IsValidPosition(leftLower))
                 {
@@ -210,10 +233,22 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(leftLower).color != this.color)
                         {
                             movements.Add(new Move(this.position, leftLower));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            }
+            while (validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+
+                rightLower = new List<int>() { this.position[0] - i, this.position[1] + i };
 
                 if (Board.IsValidPosition(rightLower))
                 {
@@ -227,7 +262,7 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(rightLower).color != this.color)
                         {
                             movements.Add(new Move(this.position, rightLower));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
@@ -253,20 +288,13 @@ namespace LIAC_CHESS
         {
             List<Move> movements = new List<Move>();
 
-            List<int> left;
-            List<int> right;
-            List<int> up;
-            List<int> down;
-
             bool validMovement = false;
             int i = 1;
             do
             {
                 validMovement = false;
-                left = new List<int>() { this.position[0], this.position[1] - i};
-                right = new List<int>() { this.position[0], this.position[1] + i};
-                up = new List<int>() { this.position[0] + i, this.position[1] };
-                down = new List<int>() { this.position[0] - i, this.position[1] };
+
+                List<int> left = new List<int>() { this.position[0], this.position[1] - i };
 
                 if (Board.IsValidPosition(left))
                 {
@@ -280,10 +308,21 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(left).color != this.color)
                         {
                             movements.Add(new Move(this.position, left));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            } while(validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+
+                List<int> right = new List<int>() { this.position[0], this.position[1] + i };
 
                 if (Board.IsValidPosition(right))
                 {
@@ -297,10 +336,21 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(right).color != this.color)
                         {
                             movements.Add(new Move(this.position, right));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            } while (validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+
+                List<int> up = new List<int>() { this.position[0] + i, this.position[1] };
 
                 if (Board.IsValidPosition(up))
                 {
@@ -314,10 +364,21 @@ namespace LIAC_CHESS
                         if (board.PieceInPosition(up).color != this.color)
                         {
                             movements.Add(new Move(this.position, up));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
+
+                i = i + 1;
+            } while(validMovement == true);
+
+            validMovement = false;
+            i = 1;
+            do
+            {
+                validMovement = false;
+                
+                List<int> down = new List<int>() { this.position[0] - i, this.position[1] };
 
                 if (Board.IsValidPosition(down))
                 {
@@ -332,7 +393,7 @@ namespace LIAC_CHESS
                         {
                             Console.WriteLine("Movimento valido: torre de " + this.position[0] + "," + this.position[1] + " para " + down[0] + "," + down[1]); 
                             movements.Add(new Move(this.position, down));
-                            validMovement = true;
+                            validMovement = false;
                         }
                     }
                 }
