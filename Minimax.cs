@@ -19,10 +19,9 @@ namespace LIAC_CHESS
         public const int MIN_HEURISTIC_VALUE = -1000;
 
         public const int PAWN_TAKEN_WEIGHT = 2;
-        public const int BISHOP_TAKEN_WEIGHT = 5;
-        public const int ROOK_TAKEN_WEIGHT = 6;
+        public const int BISHOP_TAKEN_WEIGHT = 6;
+        public const int ROOK_TAKEN_WEIGHT = 8;
 
-        public const int PAWN_ADVANCE_WEIGHT = 1;
         public const int POSITION_ADVANCE_WEIGHT = 2;
 
         public static Move DecideMovement(Board board, Player player)
@@ -136,28 +135,36 @@ namespace LIAC_CHESS
             //Console.WriteLine("Tabuleiro diferente: " + initial.IsDifferent(current));
                 // Heuristic value is defined by:
                 // - Pawns taken: PAWN_TAKEN_WEIGHT * number of pawns taken * (initial pawns number - remaining pawns number)
-            value += PAWN_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Pawn");
+                value += PAWN_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Pawn") 
+                         * (Board.MAX_PAWNS - player.GetEnemy().RemainingTypePieces(current, "Pawn"));
 
                 // - Bishops taken: BISHOP_TAKEN_WEIGHT * number of bishops taken * (initial bishops number - remaining bishops number)
-            value += BISHOP_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Bishop");
+                value += BISHOP_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Bishop")
+                         * (Board.MAX_BISHOPS - player.GetEnemy().RemainingTypePieces(current, "Bishop"));
 
                 // - Rooks taken: ROOK_TAKEN_WEIGHT * number of rooks taken * (initial rooks number - remaining rooks number)
-            value += ROOK_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Rook");
+                value += ROOK_TAKEN_WEIGHT * MoveResult.PiecesTaken(initial, current, player, "Rook")
+                         * (Board.MAX_ROOKS - player.GetEnemy().RemainingTypePieces(current, "Rook"));
 
                 // - Pawns lost: follows same logic as pawns taken, adjusting same value as negative for enemy
-            value -= PAWN_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Pawn");
+                value -= PAWN_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Pawn")
+                         * (Board.MAX_PAWNS - player.RemainingTypePieces(current, "Pawn"));
 
                 // - Bishops lost: follows same logic as bishops taken, negative value
-            value -= BISHOP_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Bishop");
+                value -= BISHOP_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Bishop")
+                         * (Board.MAX_BISHOPS - player.RemainingTypePieces(current, "Bishop"));
 
                 // - Rooks lost:
-            value -= ROOK_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Rook");
+                value -= ROOK_TAKEN_WEIGHT * MoveResult.PiecesLost(initial, current, player, "Rook")
+                        * (Board.MAX_ROOKS - player.RemainingTypePieces(current, "Rook"));
 
                 // - Number of pawns advanced:
                 //value += PAWN_ADVANCE_WEIGHT * MoveResult.PawnsAdvanced(initial, current, player);
 
                 // - Number of positions advanced, multiplied by closeness to objective
-                value += POSITION_ADVANCE_WEIGHT * MoveResult.PositionsAdvanced(initial, current, player);
+                value += POSITION_ADVANCE_WEIGHT * MoveResult.PositionsAdvanced(initial, current, player);// *(7 - player.DistanceToObjective(current)) / 2;
+
+                value -= POSITION_ADVANCE_WEIGHT * MoveResult.PositionsAdvanced(initial, current, player.GetEnemy()) * (8 - player.GetEnemy().DistanceToObjective(current));
             }
 
                     return value;

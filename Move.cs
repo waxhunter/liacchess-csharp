@@ -38,15 +38,6 @@ namespace LIAC_CHESS
             return (initialPieces - currentPieces);
         }
 
-        public static int PawnsAdvanced(Board initial, Board current, Player player)
-        {
-            int pawnsAdvanced = 0;
-
-            
-
-            return pawnsAdvanced;
-        }
-
         // ok
         public static int PositionsAdvanced(Board initial, Board current, Player player)
         {
