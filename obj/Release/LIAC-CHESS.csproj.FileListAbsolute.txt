@@ -1,0 +1,9 @@
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\LIAC-CHESS.exe.config
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\LIAC-CHESS.exe
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\LIAC-CHESS.pdb
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\Newtonsoft.Json.dll
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\Newtonsoft.Json.pdb
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\bin\Release\Newtonsoft.Json.xml
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\obj\Release\LIAC-CHESS.csprojResolveAssemblyReference.cache
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\obj\Release\LIAC-CHESS.exe
+C:\Users\usuário\Documents\Projetos\C#\Inteligência Artificial\Liac-Chess\LIAC-CHESS\LIAC-CHESS\obj\Release\LIAC-CHESS.pdb
